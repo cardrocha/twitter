@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% load static %} {% block 'cabecalho' %}
+<link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet" />
+<link href="{% static 'feed/css/feed.css' %}" rel="stylesheet" />
+{% endblock 'cabecalho' %} {% block 'conteudo' %}
+<div class="header">
+  <div class="logo">
+    <img src="{% static 'usuarios/img/logoTwitter.png' %}" />
+    <h2>Twitter</h2>
+  </div>
+  <div class="container-user">
+    <span class="user">{{ request.user.username }}</span>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="btn btn-danger botao" type="submit">logout</button>
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  <div class="container-tweet">
+    <div class="box-form">
+      <div class="new-tweet">
+        <h3>Últimos tweets</h3>
+        <label>feed</label>
+        <br />
+        {% for tweet in tweets %}
+        <div class="tweet">
+          <div class="delete">
+            <p class="paragraph" id="{{tweet.id}}">{{tweet.tweet}}</p>
+            <a class="delete-link" href="{% url 'deletar_tweet' tweet.id %}">[x]</a>
+          </div>
+          <span class="user">{{tweet.user}}</span>
+        </div>
+        <br />
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="box-form box-container">
+      <form action="{% url 'feed' %}" method="POST">
+        {% csrf_token %}
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <section class="alert {{message.tags}}">{{message}}</section>
+        {% endfor %} {% endif %}
+        <br />
+        <div class="box-btn">
+          <input
+            placeholder="O que está acontecendo?"
+            class="form-control"
+            type="text"
+            name="feed"
+          />
+          <button class="btn btn-primary">Tweetar</button>
+        </div>
+        <br />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock 'conteudo' %}
