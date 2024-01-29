@@ -28,7 +28,7 @@ DEBUG = True
 
 PORT = int(os.environ.get("PORT", 8000))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.vercel.app', 'cardrocha.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
