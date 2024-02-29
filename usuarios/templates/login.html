@@ -1,7 +1,28 @@
-{% extends 'base.html' %} {% load static %} {% block 'cabecalho' %}
-<link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet" />
-{% endblock %} {% block 'conteudo' %}
-<div class="bg1">
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+
+  <link rel="stylesheet" href="{% static 'cadastro/css/cadastro.css' %}">
+
+{% if user.is_authenticated %}
+<h1 class="text-white">Você já está logado!</h1>
+
+{% else %}
+<div class="bg-1">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+    {% endfor %}
+  {% endif %}
   <div class="container">
     <div class="row">
       <div class="col-md">
@@ -13,11 +34,11 @@
             style="margin-top: auto; margin-bottom: auto"
             class="box-titulo-item"
           >
-            <h3>Twitter</h3>
+            <h3 class="text-white">Twitter</h3>
           </div>
         </div>
         <br />
-        <div class="tac">
+        <div class="tac text-white">
           <h4 style="font-size: 30px">
             Veja o que está<br />
             acontecendo no mundo<br />
@@ -28,27 +49,29 @@
       <div class="col-md">
         <br>
         <br>
-        <div class="box-form">
-          <div>
-            <h3 class="titilo">Logar</h3>
-            {% if messages %} {% for message in messages %}
-            <section class="alert {{message.tags}}">{{message}}</section>
-            {% endfor %} {% endif %}
-            <form action="{% url 'login' %}" method="POST">{% csrf_token %}
-              <label>Username</label>
-              <input type="text" class="input-form" name="username" id="" />
-              <br />
-              <br />
-              <label>Senha</label>
-              <input type="password" class="input-form" name="senha" id="" />
-              <br />
-              <br />
-              <input type="submit" value="Enviar" class="btn-cadastro" />
-              <a class="btn-cadastro-link" href="/usuarios/cadastro">Voltar</a>
-              <br />
-              <br />
-              <br />
-              <br />
+        <div class="box-form w-100">
+          <h1>Logar</h1>
+          <p class="fw-bold">Entre na sua conta, e aproveite o twitter hoje...</p>
+                <form method="POST" action={% url 'login' %}>
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Usuário</label>
+                    <input type="text" class="form-control" name="username" id="name" placeholder="Digite seu Usuário">
+                  </div>
+                  <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" name="password" id="senha" placeholder="Digite sua senha">
+                  </div>
+                  <br/>
+                  <div class="d-block">
+                    <div>
+                      <button type="submit" class="btn-cadastro">Enviar</button>
+                      <a class="btn-cadastro-link" href="{% url 'cadastro' %}">Voltar</a>
+                    </div>
+                    <small>Não tem conta, cadastre-se! Clique no botão de voltar...</small>
+                </div>
+                </form>
+              </div>
             </form>
           </div>
         </div>
@@ -56,4 +79,7 @@
     </div>
   </div>
 </div>
-{% endblock 'conteudo' %}
+{% endif %}
+{% endblock %}
+
+

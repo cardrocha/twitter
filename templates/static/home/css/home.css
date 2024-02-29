@@ -1,0 +1,29 @@
+.feed {
+  background-color: #123364;
+  color: #fff;
+  border: none;
+  position: relative;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+span {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background-color: #fff;
+  color: #000;
+  padding: 2px 10px;
+  border-radius: 4px;
+}
+
+.btn {
+  background-color: #123364;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #1c4d96;
+}

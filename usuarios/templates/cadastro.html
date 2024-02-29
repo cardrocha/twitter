@@ -1,11 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% block content %}
 {% load static %}
 
-{% block 'cabecalho' %}
-  <link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">
-{% endblock %}
+  <link rel="stylesheet" href="{% static 'cadastro/css/cadastro.css' %}">
 
-{% block 'conteudo' %}
 <div class="bg1">
   <div class="container">
     <div class="row">
@@ -18,11 +16,11 @@
             style="margin-top: auto; margin-bottom: auto"
             class="box-titulo-item"
           >
-            <h3>Twitter</h3>
+            <h3 class="text-white">Twitter</h3>
           </div>
         </div>
         <br />
-        <div class="tac">
+        <div class="tac text-white">
           <h4 style="font-size: 30px">
             Veja o que está<br />
             acontecendo no mundo<br />
@@ -31,51 +29,25 @@
         </div>
       </div>
       <div class="col-md">
-        <br />
-        <br />
         <div class="box-form">
-          <div class="box-circle">
-            <div class="circle c1"></div>
-            <div class="circle c2"></div>
-            <div class="circle c3"></div>
-          </div>
           <br />
           <h3>Participe hoje do Twitter</h3>
-          {% if messages %}
-            {% for message in messages %}
-              <section class="alert {{message.tags}}">
-                {{message}}
-              </section>
-            {% endfor %}
-          {% endif %}
-          <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
-            <label>Username</label>
-            <input type="text" class="input-form" name="username" id="" />
-            <br />
-            <br />
-            <label>Senha</label>
-            <input type="password" class="input-form" name="senha" id="" />
-            <br />
-            <br />
-            <label>Confirmar senha</label>
-            <input
-              type="password"
-              class="input-form"
-              name="confirmar_senha"
-              id=""
-            />
-            <br />
-            <br />
-            <input type="submit" value="Enviar" class="btn-cadastro" />
-            <a class="btn-cadastro-link" href="/usuarios/logar">Login</a>
-            <br />
-            <br />
-            <br />
-            <br />
+          <form class="box-form" method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+          <br/>
+          <div class="d-block">
+            <div>
+              <button type="submit" class="btn-cadastro">Cadastre-se</button>
+              <a class="btn-cadastro-link" href="{% url 'login' %}">Login</a>
+            <div>
+              <small>Já tem conta, faça o login! Clique no botão de login...</small>
+          </div>
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-{% endblock 'conteudo' %}
+{% endblock %}
+

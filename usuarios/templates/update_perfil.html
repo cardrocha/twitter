@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<div class="col-md-6 offset-md-3">
+  <h1 class="text-white">Atualização de perfil</h1>
+  <br />
+
+  <form
+    class="text-white"
+    method="post"
+    action=""
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %} {{ profile_form.as_p }}
+    <br />
+    <button type="submit" class="btn btn-secondary">Atualizar o perfil</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,12 +1,15 @@
-{% extends "base.html" %} {% load static %} {% block 'cabecalho' %}
+{% comment %} {% extends "base.html" %} {% load static %} {% block 'cabecalho'
+%}
 <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet" />
 <link href="{% static 'feed/css/feed.css' %}" rel="stylesheet" />
 {% endblock 'cabecalho' %} {% block 'conteudo' %}
 <div class="header">
+  {% endcomment %} {% comment %}
   <div class="logo">
     <img src="{% static 'usuarios/img/logoTwitter.png' %}" />
     <h2>Twitter</h2>
   </div>
+  {% endcomment %} { {% comment %}
   <div class="container-user">
     <span class="user">{{ request.user.username }}</span>
     <form action="{% url 'logout' %}" method="post">
@@ -27,7 +30,9 @@
         <div class="tweet">
           <div class="delete">
             <p class="paragraph" id="{{tweet.id}}">{{tweet.tweet}}</p>
-            <a class="delete-link" href="{% url 'deletar_tweet' tweet.id %}">[x]</a>
+            <a class="delete-link" href="{% url 'deletar_tweet' tweet.id %}"
+              >[x]</a
+            >
           </div>
           <span class="user">{{tweet.user}}</span>
         </div>
@@ -38,8 +43,7 @@
 
     <div class="box-form box-container">
       <form action="{% url 'feed' %}" method="POST">
-        {% csrf_token %}
-        {% if messages %}
+        {% csrf_token %} {% if messages %}
         <br />
         {% for message in messages %}
         <section class="alert {{message.tags}}">{{message}}</section>
@@ -60,4 +64,10 @@
   </div>
 </div>
 
-{% endblock 'conteudo' %}
+{% endblock 'conteudo' %} {% endcomment %} {% extends 'base.html' %} 
+{% block 'conteudo' %}
+<h1>tweets</h1>
+{% for tweet in tweets %} 
+  {{ tweet }}<br /><br />
+  {% endfor %} 
+{% endblock %}

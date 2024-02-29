@@ -1,16 +1,16 @@
 [tool.poetry]
 name = "twitter"
 version = "0.1.0"
-description = "app-social-media"
+description = "api-twitter"
 authors = ["cardrocha <cardrocharj@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-gitpython = "^3.1.41"
-django = "^5.0.1"
-
+python = "^3.10 || ^3.11"  # Update to allow Python 3.10.x and 3.11.x
+django = "^5.0.2"
+pillow = "^10.2.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
