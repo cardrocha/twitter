@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 
-  <link rel="stylesheet" href="{% static 'cadastro/css/cadastro.css' %}">
+<link rel="stylesheet" href="{% static 'cadastro/css/cadastro.css' %}">
 
 <div class="bg1">
   <div class="container">
@@ -32,17 +32,19 @@
         <div class="box-form">
           <br />
           <h3>Participe hoje do Twitter</h3>
-          <form class="box-form" method="post" action="">
+          <form class="box-form" method="POST" action="">
             {% csrf_token %}
             {{ form.as_p }}
-          <br/>
-          <div class="d-block">
-            <div>
-              <button type="submit" class="btn-cadastro">Cadastre-se</button>
-              <a class="btn-cadastro-link" href="{% url 'login' %}">Login</a>
-            <div>
-              <small>Já tem conta, faça o login! Clique no botão de login...</small>
-          </div>
+            <br/>
+            <div class="d-block">
+              <div>
+                <button type="submit" class="btn-cadastro">Cadastre-se</button>
+                <a class="btn-cadastro-link" href="{% url 'login' %}">Login</a>
+              </div>
+              <div>
+                <small>Já tem conta, faça o login! Clique no botão de login...</small>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -50,4 +52,5 @@
   </div>
 </div>
 {% endblock %}
+
 

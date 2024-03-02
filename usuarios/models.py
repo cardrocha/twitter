@@ -10,7 +10,8 @@ class Profile(models.Model):
     related_name="followed_by", 
     symmetrical=False, 
     blank=True)
-  bio = models.CharField(max_length=50)
+  
+  bio = models.CharField(max_length=60)
   profile_image = models.ImageField(null=True, blank=True, upload_to='images/')
   
   date_modified = models.DateTimeField(User, auto_now=True)

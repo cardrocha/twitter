@@ -52,23 +52,23 @@
         <div class="box-form w-100">
           <h1>Logar</h1>
           <p class="fw-bold">Entre na sua conta, e aproveite o twitter hoje...</p>
-                <form method="POST" action={% url 'login' %}>
-                  {% csrf_token %}
-                  <div class="mb-3">
-                    <label for="name" class="form-label">Usuário</label>
-                    <input type="text" class="form-control" name="username" id="name" placeholder="Digite seu Usuário">
+              <form method="POST" action={% url 'login' %}>
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="name" class="form-label">Usuário</label>
+                  <input type="text" class="form-control" name="username" id="name" placeholder="Digite seu Usuário">
+                </div>
+                <div class="mb-3">
+                  <label for="senha" class="form-label">Senha</label>
+                  <input type="password" class="form-control" name="password" id="senha" placeholder="Digite sua senha">
+                </div>
+                <br/>
+                <div class="d-block">
+                  <div>
+                    <button type="submit" class="btn-cadastro">Enviar</button>
+                    <a class="btn-cadastro-link" href="{% url 'cadastro' %}">Voltar</a>
                   </div>
-                  <div class="mb-3">
-                    <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" name="password" id="senha" placeholder="Digite sua senha">
-                  </div>
-                  <br/>
-                  <div class="d-block">
-                    <div>
-                      <button type="submit" class="btn-cadastro">Enviar</button>
-                      <a class="btn-cadastro-link" href="{% url 'cadastro' %}">Voltar</a>
-                    </div>
-                    <small>Não tem conta, cadastre-se! Clique no botão de voltar...</small>
+                  <small>Não tem conta, cadastre-se! Clique no botão de voltar...</small>
                 </div>
                 </form>
               </div>

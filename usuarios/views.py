@@ -23,6 +23,8 @@ def home(request):
   else:
     messages.error(request, "Você deve estar logado para visualizar a página de twitters	.")
     return redirect('login')
+    # tweets = Tweet.objects.filter().order_by("-created_at")
+    # return render(request, 'home.html', {"tweets": tweets})
 def profile_list(request):
   if request.user.is_authenticated:
     profiles = Profile.objects.exclude(user=request.user)
@@ -49,10 +51,32 @@ def profile(request, pk):
 
       return render(request, 'profile.html', {"profile": profile, "tweets": tweets})
     else:
-      return render(request, 'profile.html', {"profile": profile, "tweets": tweets}) 
+      return render(request, 'profile.html', {"profile": profile, "tweets": tweets})
   else:
     messages.error(request, "Você deve estar logado para visualizar a página de perfil.")
     return redirect('profile')
+  
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+def cadastro_user(request):
+    form = SignUpForm()
+
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)  # Não salvar imediatamente para que possamos definir a senha
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            
+            # Define a senha usando set_password
+            user.set_password(password)
+            user.save()  # Salva o usuário no banco de dados com a senha definida
+            
+            messages.success(request, "Cadastro realizado com sucesso! Faça o login para continuar.")
+            return redirect('login')
+
+    return render(request, "cadastro.html", {'form': form})
 
 
 def login_user(request):
@@ -74,29 +98,6 @@ def logout_user(request):
   logout(request)
   messages.error(request, "Você desconectou do Twitter!")
   return redirect('login')
-
-def cadastro_user(request):
-  if request.user.is_authenticated:
-      return redirect('home')
-
-  user = None 
-  
-  if request.method == 'POST':
-    form = SignUpForm(request.POST)
-    if form.is_valid():
-      user = form.save() 
-      username = form.cleaned_data['username']
-      password = form.cleaned_data['password1']
-
-      user = authenticate(username=username, password=password)
-      if user is not None:
-        login(request, user) 
-      else:
-        messages.success(request, "Usuário cadastrado com sucesso!")
-        return redirect('login')  
-  else:
-      form = SignUpForm()
-  return render(request, 'cadastro.html', {'form': form})
 
 def update_perfil(request):
   if request.user.is_authenticated:
